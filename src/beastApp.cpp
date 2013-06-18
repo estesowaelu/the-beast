@@ -1,6 +1,9 @@
+//
+//  The Beast
+//	A game conceived for Global Game Jam 2013
+//
 //  beastApp.cpp
-//	for Global Game Jam 2013
-//  Created by Tim Honeywell on 13/01/26.
+//  Created by Tim Honeywell on 26 January 2013.
 //
 
 #include <iostream>
@@ -18,9 +21,6 @@
 #include "Resources.h"
 #include "Room.h"
 
-#define WIDTH 1920
-#define HEIGHT 1200
-
 using namespace ci;
 using namespace ci::app;
 using			std::list;
@@ -36,10 +36,6 @@ class beast : public AppBasic {
 	virtual void update();
 	virtual void draw();
 	
-	void drawTitle();
-	void drawCredits();
-	int creditscounter;
-
 	//INTERFACE
 	virtual void keyDown(KeyEvent event);
 	virtual void mouseDown(MouseEvent event);
@@ -50,22 +46,25 @@ class beast : public AppBasic {
 	Vec2i mMouseOffset;
 	Vec2i mMouseDownPos;
 	bool mMousePressed;
-	
+
+    //STATES
 	bool play;
 	bool credits;
-	
+	void drawTitle();
+	void drawCredits();
+	int creditscounter;
+    
 	//UTILITIES
 	Room room;
 	int mRoomID;
 	void changeRoom(int roomNumber);
 	int inventorySize;
-	
-	//Display
 	ci::Color mColor;
+    int centerHeight;
+    int centerWidth;
 };
 
 void beast::prepareSettings(Settings *settings){
-    settings->setWindowSize(WIDTH, HEIGHT);
     settings->setFrameRate(60.0f);
 }
 
@@ -74,14 +73,16 @@ void beast::setup() {
 	inventorySize = 10;
 	mColor = Color(0.0f, 0.0f, 0.0f);
 	creditscounter=0;
-
+    
 	play = false;
 	credits = false;
 	
-	mMouseLoc = Vec2i(getWindowWidth()/2, getWindowHeight()/2);
-	
 	room.setup();
+    
 	app::setFullScreen();
+    centerWidth = getWindowWidth()/2;
+    centerHeight = getWindowHeight()/2;
+	mMouseLoc = Vec2i(centerWidth, centerHeight);
 }
 
 ///////////////////////////////////////////////////////////////
@@ -95,30 +96,15 @@ void beast::update() {
 /////			DRAWING			/////
 ///////////////////////////////////////////////////////////////
 void beast::draw() {
-	if (!play && !credits)		drawTitle();
-	else if (!play && credits)	drawCredits();
-	else						room.draw();
-	app::console() << "Play: " << play << " Credits: " << credits << std::endl;
+    if (play) room.draw();
+    else if (credits) drawCredits();
+    else drawTitle();
 }
 
 void beast::drawTitle() {
 	gl::Texture titleIMG = loadImage(loadResource("BeastTitle.png"));
 	titleIMG.enableAndBind();
 	gl::draw(titleIMG, getWindowBounds());
-	
-/*	gl::clear();
-	TextLayout screenText;
-	screenText.setColor(Color(1,1,1));
-	screenText.setBorder(20, 10);
-	screenText.addLine("THE BEAST");
-	screenText.addLine("click anywhere to continue");
-	
-	gl::enableAlphaBlending();
-	gl::Texture textLayer(screenText.render());
-	textLayer.enableAndBind();
-	gl::draw(textLayer, Rectf(0,1100, 300,1200));
-	gl::disableAlphaBlending();
-*/
 }
 
 void beast::drawCredits() {
@@ -127,39 +113,55 @@ void beast::drawCredits() {
 	TextLayout screenText;
 	screenText.setColor(Color(1,1,1));
 	screenText.setBorder(20,10);
-	////
 	if(creditscounter<180) {
 		screenText.addCenteredLine("STORY");
-		screenText.addCenteredLine("");
+		screenText.addCenteredLine("    ");
 		screenText.addCenteredLine("Marc Repert");
 		screenText.addCenteredLine("Bobby Canciello");
+		screenText.addCenteredLine("Tim Honeywell");
+		screenText.addCenteredLine("    ");
 	} else if(creditscounter<360) {
 		screenText.addCenteredLine("LEVELS");
-		screenText.addCenteredLine("");
+		screenText.addCenteredLine("    ");
 		screenText.addCenteredLine("Bobby Canciello");
+		screenText.addCenteredLine("Tim Honeywell");
 		screenText.addCenteredLine("Marc Repert");
+		screenText.addCenteredLine("    ");
 	} else if(creditscounter<540) {
 		screenText.addCenteredLine("CODE");
-		screenText.addCenteredLine("");
+		screenText.addCenteredLine("    ");
 		screenText.addCenteredLine("Tim Honeywell");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
 	} else if(creditscounter<720) {
 		screenText.addCenteredLine("ART");
-		screenText.addCenteredLine("");
+		screenText.addCenteredLine("    ");
 		screenText.addCenteredLine("Bobby Canciello");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
 	} else if(creditscounter<900) {
 		screenText.addCenteredLine("WRITING");
-		screenText.addCenteredLine("");
+		screenText.addCenteredLine("    ");
 		screenText.addCenteredLine("Marc Repert");
-		screenText.addCenteredLine("Andy Lohmann");
 		screenText.addCenteredLine("Bobby Canciello");
+		screenText.addCenteredLine("Tim Honeywell");
+		screenText.addCenteredLine("Andy Lohmann");
 	} else if(creditscounter<1080) {
 		screenText.addCenteredLine("SOUND");
-		screenText.addCenteredLine("");
+		screenText.addCenteredLine("    ");
 		screenText.addCenteredLine("Marc Repert");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
 	} else if(creditscounter<1260) {
-//		screenText.addCenteredLine("MUSIC");
-//		screenText.addCenteredLine("");
-//		screenText.addCenteredLine("Martin Bayer");
+		screenText.addCenteredLine("MUSIC");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("Sigur Rós");
+		screenText.addCenteredLine("Martin Bayer");
+		screenText.addCenteredLine("    ");
+		screenText.addCenteredLine("    ");
 	} else {
 		creditscounter = 0;
 		credits = false;
@@ -167,7 +169,7 @@ void beast::drawCredits() {
 	gl::enableAlphaBlending();
 	gl::Texture textLayer(screenText.render());
 	textLayer.enableAndBind();
-	gl::draw(textLayer, Rectf(800,450, 1160,750));
+	gl::draw(textLayer, Rectf(centerWidth-80, centerHeight-80, centerWidth+80, centerHeight+80));
 	gl::disableAlphaBlending();
 }
 
@@ -190,10 +192,10 @@ void beast::mouseUp(MouseEvent event) {
 	if (!play && !credits) {
 		play=true;
 		room.changeRoom(1);
-	} else if (!play && credits) {
-		credits = false;
-	} else if (play && !credits) {
+	} else if (play) {
 		room.click(mMouseLoc);
+	} else if (credits) {
+		credits = false;
 	}
 }
 

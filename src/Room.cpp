@@ -1,9 +1,9 @@
 //
+//  The Beast
+//	A game conceived for Global Game Jam 2013
+//
 //  Room.cpp
-//  beast
-//
-//  Created by Tim Honeywell on 13/01/26.
-//
+//  Created by Tim Honeywell on 26 January 2013.
 //
 
 #include "Room.h"
@@ -61,8 +61,8 @@ void Room::setup() {
 	fireplace01 = loadImage(loadResource(RES_IT_05));
 	fireplace02 = loadImage(loadResource(RES_IT_06));
 	mirror01 = loadImage(loadResource(RES_IT_07));
-		
-//	aLayer.playSound(aLayer.tempSTrack);
+    
+    aLayer.playSound(aLayer.tempSTrack);
 	
 	matches = false;
 	R01key = false;
@@ -74,7 +74,6 @@ void Room::setup() {
 	R01DoorClick = 0;
 	R01DoorLock = true;
 	R01DoorPush = 0;
-	
 }
 
 ///////////////////////////////////////////////////////////////
@@ -89,72 +88,86 @@ void Room::changeRoom(int newRoom) {
 	mRoomID = newRoom;
 	aLayer.silence();
 	switch (mRoomID) {
-			//master bedroom
-		case 1:	aLayer.setSoundVolume(aLayer.rainIndoors, 255);
-				aLayer.playSound(aLayer.rainIndoors);
-				aLayer.setSoundVolume(aLayer.Heartbeat01, 255);
-				aLayer.playSound(aLayer.Heartbeat01);
-				break;
-			//painting hallway
-		case 2:	aLayer.setSoundVolume(aLayer.Heartbeat02, 255);
-				aLayer.playSound(aLayer.Heartbeat02);
-				break;
-			// ghallway bottom
-		case 3:	aLayer.setSoundVolume(aLayer.Heartbeat03, 255);
-				aLayer.playSound(aLayer.Heartbeat03);
-				break;
-			// ghallway top
-		case 4:	aLayer.setSoundVolume(aLayer.Heartbeat04, 255);
-				aLayer.playSound(aLayer.Heartbeat04);
-				aLayer.setSoundVolume(aLayer.tickTock, 180);
-				aLayer.playSound(aLayer.tickTock);
-				aLayer.setSoundVolume(aLayer.rainIndoors, 255);
-				aLayer.playSound(aLayer.rainIndoors);
-				break;
-			// living
-		case 5:	aLayer.setSoundVolume(aLayer.Heartbeat05, 255);
-				aLayer.playSound(aLayer.Heartbeat05);
-				break;
-			// kitchen
-		case 6:	aLayer.setSoundVolume(aLayer.Heartbeat06, 255);
-				aLayer.playSound(aLayer.Heartbeat06);
-									// boiling pot??
-				break;
-			// guest
-		case 7:	aLayer.setSoundVolume(aLayer.Heartbeat07, 255);
-				aLayer.playSound(aLayer.Heartbeat07);
-				aLayer.setSoundVolume(aLayer.fire, 255);
-				aLayer.playSound(aLayer.fire);
-				break;
-			// lib
-		case 8:	aLayer.setSoundVolume(aLayer.Heartbeat08, 255);
-				aLayer.playSound(aLayer.Heartbeat08);
-				break;
-			// candles
-		case 9:	aLayer.setSoundVolume(aLayer.Heartbeat09, 255);
-				aLayer.playSound(aLayer.Heartbeat09);
-				aLayer.setSoundVolume(aLayer.rainIndoors, 255);
-				aLayer.playSound(aLayer.rainIndoors);
-				break;
-			// balcony
-		case 10:	aLayer.setSoundVolume(aLayer.Heartbeat10, 255);
-				aLayer.playSound(aLayer.Heartbeat10);
-				aLayer.setSoundVolume(aLayer.rainOutdoors, 255);
-				aLayer.playSound(aLayer.rainOutdoors);
-				break;
-			// basement hallway
-		case 11:	aLayer.setSoundVolume(aLayer.Heartbeat11, 255);
-				aLayer.playSound(aLayer.Heartbeat11);
-				break;
-			// basement stairs top
-		case 12:	aLayer.setSoundVolume(aLayer.Heartbeat12, 255);
-				aLayer.playSound(aLayer.Heartbeat12);
-				break;
-			// basement stairs bottom
-		case 13:	aLayer.setSoundVolume(aLayer.Heartbeat13, 255);
-				aLayer.playSound(aLayer.Heartbeat13);
-				break;
-		default:	break;
+        //master bedroom
+		case 1:
+            aLayer.setSoundVolume(aLayer.rainIndoors, 255);
+            aLayer.setSoundVolume(aLayer.Heartbeat01, 255);
+            aLayer.playSound(aLayer.rainIndoors);
+            aLayer.playSound(aLayer.Heartbeat01);
+            break;
+        //painting hallway
+		case 2:
+            aLayer.setSoundVolume(aLayer.Heartbeat02, 255);
+            aLayer.playSound(aLayer.Heartbeat02);
+            break;
+        //ghallway bottom
+		case 3:
+            aLayer.setSoundVolume(aLayer.Heartbeat03, 255);
+            aLayer.playSound(aLayer.Heartbeat03);
+            break;
+        //ghallway top
+		case 4:
+            aLayer.setSoundVolume(aLayer.Heartbeat04, 255);
+            aLayer.setSoundVolume(aLayer.tickTock, 180);
+            aLayer.setSoundVolume(aLayer.rainIndoors, 255);
+            aLayer.playSound(aLayer.Heartbeat04);
+            aLayer.playSound(aLayer.tickTock);
+            aLayer.playSound(aLayer.rainIndoors);
+            break;
+        //living
+		case 5:
+            aLayer.setSoundVolume(aLayer.Heartbeat05, 255);
+            aLayer.playSound(aLayer.Heartbeat05);
+            break;
+        //kitchen
+		case 6:
+            aLayer.setSoundVolume(aLayer.Heartbeat06, 255);
+            aLayer.playSound(aLayer.Heartbeat06);
+            // boiling pot??
+            break;
+        //guest
+		case 7:
+            aLayer.setSoundVolume(aLayer.Heartbeat07, 255);
+			aLayer.setSoundVolume(aLayer.fire, 255);
+            aLayer.playSound(aLayer.Heartbeat07);
+            aLayer.playSound(aLayer.fire);
+            break;
+        //lib
+		case 8:
+            aLayer.setSoundVolume(aLayer.Heartbeat08, 255);
+            aLayer.playSound(aLayer.Heartbeat08);
+            break;
+        //candles
+		case 9:
+            aLayer.setSoundVolume(aLayer.Heartbeat09, 255);
+            aLayer.setSoundVolume(aLayer.rainIndoors, 255);
+            aLayer.playSound(aLayer.Heartbeat09);
+            aLayer.playSound(aLayer.rainIndoors);
+            break;
+        //balcony
+		case 10:
+            aLayer.setSoundVolume(aLayer.Heartbeat10, 255);
+            aLayer.setSoundVolume(aLayer.rainOutdoors, 255);
+            aLayer.playSound(aLayer.Heartbeat10);
+            aLayer.playSound(aLayer.rainOutdoors);
+            break;
+        //basement hallway
+		case 11:
+            aLayer.setSoundVolume(aLayer.Heartbeat11, 255);
+            aLayer.playSound(aLayer.Heartbeat11);
+            break;
+        //basement stairs top
+		case 12:
+            aLayer.setSoundVolume(aLayer.Heartbeat12, 255);
+            aLayer.playSound(aLayer.Heartbeat12);
+            break;
+        //basement stairs bottom
+		case 13:
+            aLayer.setSoundVolume(aLayer.Heartbeat13, 255);
+            aLayer.playSound(aLayer.Heartbeat13);
+            break;
+		default:
+            break;
 	}
 	framecounter = 0;
 }
@@ -637,8 +650,6 @@ void Room::drawRoom11() {
 	background11.enableAndBind();
 	gl::draw(background11, getWindowBounds());
 	gl::disableAlphaBlending();
-	
-
 }
 void Room::drawRoom12() {
 	// Basement_Top
@@ -646,8 +657,6 @@ void Room::drawRoom12() {
 	background12.enableAndBind();
 	gl::draw(background12, getWindowBounds());
 	gl::disableAlphaBlending();
-	
-
 }
 void Room::drawRoom13() {
 	// Basement_Bottom
@@ -656,6 +665,4 @@ void Room::drawRoom13() {
 	background13.enableAndBind();
 	gl::draw(background13, getWindowBounds());
 	gl::disableAlphaBlending();
-	
-
 }

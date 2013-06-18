@@ -1,9 +1,9 @@
 //
+//  The Beast
+//	A game conceived for Global Game Jam 2013
+//
 //  PrintLayer.cpp
-//  beast
-//
-//  Created by Tim Honeywell on 13/01/27.
-//
+//  Created by Tim Honeywell on 27 January 2013.
 //
 
 #include "PrintLayer.h"
@@ -18,8 +18,7 @@
 using namespace ci;
 using namespace ci::app;
 
-PrintLayer::PrintLayer() {
-}
+PrintLayer::PrintLayer() {}
 
 void PrintLayer::Bed() {
 	TextLayout screenText;

@@ -1,16 +1,14 @@
 //
+//  The Beast
+//	A game conceived for Global Game Jam 2013
+//
 //  AudioLayer.cpp
-//  beast
-//
-//  Created by Tim Honeywell on 13/01/27.
-//
+//  Created by Tim Honeywell on 27 January 2013.
 //
 
 #include "AudioLayer.h"
 
-
-AudioLayer::AudioLayer() {
-}
+AudioLayer::AudioLayer() {}
 
 void AudioLayer::initialize() {
 	EnterMovies();
