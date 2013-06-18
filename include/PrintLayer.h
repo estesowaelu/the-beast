@@ -14,6 +14,14 @@
 class PrintLayer {
 public:
 	PrintLayer();
+    
+    ci::Vec2i TL;
+    ci::Vec2i BR;
+    
+    void setup();
+    
+    ci::TextLayout basicTemplate();
+    void renderText(ci::TextLayout screenText);
 		
 	void Bed();
 	void WardrobeAjar1();
