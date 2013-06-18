@@ -1,9 +1,9 @@
 //
+//  The Beast
+//	A game conceived for Global Game Jam 2013
+//
 //  Room.h
-//  beast
-//
-//  Created by Tim Honeywell on 13/01/26.
-//
+//  Created by Tim Honeywell on 26 January 2013.
 //
 
 #pragma once
@@ -34,8 +34,8 @@ public:
 	bool lightning;
 	int marker;
 
-	AudioLayer aLayer;
-	PrintLayer pLayer;
+	AudioLayer audioLayer;
+	PrintLayer printLayer;
 
 	void serviceClick(Vec2i mMouseLoc);
 	
@@ -60,9 +60,25 @@ public:
 	int R01P1Click;
 	int R01P2Click;
 	int R01DoorClick;
-	bool R01DoorLock;
 	int R01DoorPush;
+	bool R01DoorLock;
 	
+    //Room Update methods
+	void updateRoom01(Vec2i mMouseLoc);
+	void updateRoom02(Vec2i mMouseLoc);
+	void updateRoom03(Vec2i mMouseLoc);
+	void updateRoom04(Vec2i mMouseLoc);
+	void updateRoom05(Vec2i mMouseLoc);
+	void updateRoom06(Vec2i mMouseLoc);
+	void updateRoom07(Vec2i mMouseLoc);
+	void updateRoom08(Vec2i mMouseLoc);
+	void updateRoom09(Vec2i mMouseLoc);
+	void updateRoom10(Vec2i mMouseLoc);
+	void updateRoom11(Vec2i mMouseLoc);
+	void updateRoom12(Vec2i mMouseLoc);
+	void updateRoom13(Vec2i mMouseLoc);
+    
+    //Room draw methods
 	void drawRoom01();
 	void drawRoom02();
 	void drawRoom03();
@@ -106,18 +122,4 @@ public:
 	gl::Texture fireplace02;
 	gl::Texture mirror01;
 	
-	void updateRoom01(Vec2i mMouseLoc);
-	void updateRoom02(Vec2i mMouseLoc);
-	void updateRoom03(Vec2i mMouseLoc);
-	void updateRoom04(Vec2i mMouseLoc);
-	void updateRoom05(Vec2i mMouseLoc);
-	void updateRoom06(Vec2i mMouseLoc);
-	void updateRoom07(Vec2i mMouseLoc);
-	void updateRoom08(Vec2i mMouseLoc);
-	void updateRoom09(Vec2i mMouseLoc);
-	void updateRoom10(Vec2i mMouseLoc);
-	void updateRoom11(Vec2i mMouseLoc);
-	void updateRoom12(Vec2i mMouseLoc);
-	void updateRoom13(Vec2i mMouseLoc);
-
 };

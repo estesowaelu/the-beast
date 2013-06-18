@@ -30,12 +30,15 @@ Room::Room() {
 }
 
 void Room::setup() {
+    //setup utilities
+	audioLayer.setup();
+    printLayer.setup();
+	
+    //setup trackers
 	mRoomID = 0;
-	
-	aLayer.initialize();
-	
 	framecounter = 0;
-		
+    
+    //load art assets
 	background01 = loadImage(loadResource(RES_BG_01));
 	background02 = loadImage(loadResource(RES_BG_02));
 	background03 = loadImage(loadResource(RES_BG_03));
@@ -50,20 +53,22 @@ void Room::setup() {
 	background12 = loadImage(loadResource(RES_BG_12));
 	background13 = loadImage(loadResource(RES_BG_13));
 	background14 = loadImage(loadResource(RES_BG_14));
-	candle01 = loadImage(loadResource(RES_IT_01));
-	candle02 = loadImage(loadResource(RES_IT_02));
-	candle03 = loadImage(loadResource(RES_IT_03));
-	candle04 = loadImage(loadResource(RES_IT_04));
-	window01 = loadImage(loadResource(RES_IT_09));
-	window02 = loadImage(loadResource(RES_IT_08));
-	window03 = loadImage(loadResource(RES_IT_11));
-	window04 = loadImage(loadResource(RES_IT_10));
-	fireplace01 = loadImage(loadResource(RES_IT_05));
-	fireplace02 = loadImage(loadResource(RES_IT_06));
-	mirror01 = loadImage(loadResource(RES_IT_07));
+	candle01 =     loadImage(loadResource(RES_IT_01));
+	candle02 =     loadImage(loadResource(RES_IT_02));
+	candle03 =     loadImage(loadResource(RES_IT_03));
+	candle04 =     loadImage(loadResource(RES_IT_04));
+	window01 =     loadImage(loadResource(RES_IT_09));
+	window02 =     loadImage(loadResource(RES_IT_08));
+	window03 =     loadImage(loadResource(RES_IT_11));
+	window04 =     loadImage(loadResource(RES_IT_10));
+	fireplace01 =  loadImage(loadResource(RES_IT_05));
+	fireplace02 =  loadImage(loadResource(RES_IT_06));
+	mirror01 =     loadImage(loadResource(RES_IT_07));
     
-    aLayer.playSound(aLayer.tempSTrack);
+    //play soundtrack
+    audioLayer.playSound(audioLayer.tempSTrack);
 	
+    //initialize game states
 	matches = false;
 	R01key = false;
 	R01ClickWhich = 0;
@@ -81,90 +86,90 @@ void Room::setup() {
 ///////////////////////////////////////////////////////////////
 void Room::update() {
 	framecounter++;
-	aLayer.service();
+	audioLayer.service();
 }
 
 void Room::changeRoom(int newRoom) {
 	mRoomID = newRoom;
-	aLayer.silence();
+	audioLayer.silence();
 	switch (mRoomID) {
         //master bedroom
 		case 1:
-            aLayer.setSoundVolume(aLayer.rainIndoors, 255);
-            aLayer.setSoundVolume(aLayer.Heartbeat01, 255);
-            aLayer.playSound(aLayer.rainIndoors);
-            aLayer.playSound(aLayer.Heartbeat01);
+            audioLayer.setSoundVolume(audioLayer.rainIndoors, 255);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat01, 255);
+            audioLayer.playSound(audioLayer.rainIndoors);
+            audioLayer.playSound(audioLayer.Heartbeat01);
             break;
         //painting hallway
 		case 2:
-            aLayer.setSoundVolume(aLayer.Heartbeat02, 255);
-            aLayer.playSound(aLayer.Heartbeat02);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat02, 255);
+            audioLayer.playSound(audioLayer.Heartbeat02);
             break;
-        //ghallway bottom
+        //grand hallway bottom
 		case 3:
-            aLayer.setSoundVolume(aLayer.Heartbeat03, 255);
-            aLayer.playSound(aLayer.Heartbeat03);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat03, 255);
+            audioLayer.playSound(audioLayer.Heartbeat03);
             break;
-        //ghallway top
+        //grand hallway top
 		case 4:
-            aLayer.setSoundVolume(aLayer.Heartbeat04, 255);
-            aLayer.setSoundVolume(aLayer.tickTock, 180);
-            aLayer.setSoundVolume(aLayer.rainIndoors, 255);
-            aLayer.playSound(aLayer.Heartbeat04);
-            aLayer.playSound(aLayer.tickTock);
-            aLayer.playSound(aLayer.rainIndoors);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat04, 255);
+            audioLayer.setSoundVolume(audioLayer.tickTock, 180);
+            audioLayer.setSoundVolume(audioLayer.rainIndoors, 255);
+            audioLayer.playSound(audioLayer.Heartbeat04);
+            audioLayer.playSound(audioLayer.tickTock);
+            audioLayer.playSound(audioLayer.rainIndoors);
             break;
-        //living
+        //living room
 		case 5:
-            aLayer.setSoundVolume(aLayer.Heartbeat05, 255);
-            aLayer.playSound(aLayer.Heartbeat05);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat05, 255);
+            audioLayer.playSound(audioLayer.Heartbeat05);
             break;
         //kitchen
 		case 6:
-            aLayer.setSoundVolume(aLayer.Heartbeat06, 255);
-            aLayer.playSound(aLayer.Heartbeat06);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat06, 255);
+            audioLayer.playSound(audioLayer.Heartbeat06);
             // boiling pot??
             break;
-        //guest
+        //guest bedroom
 		case 7:
-            aLayer.setSoundVolume(aLayer.Heartbeat07, 255);
-			aLayer.setSoundVolume(aLayer.fire, 255);
-            aLayer.playSound(aLayer.Heartbeat07);
-            aLayer.playSound(aLayer.fire);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat07, 255);
+			audioLayer.setSoundVolume(audioLayer.fire, 255);
+            audioLayer.playSound(audioLayer.Heartbeat07);
+            audioLayer.playSound(audioLayer.fire);
             break;
-        //lib
+        //library
 		case 8:
-            aLayer.setSoundVolume(aLayer.Heartbeat08, 255);
-            aLayer.playSound(aLayer.Heartbeat08);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat08, 255);
+            audioLayer.playSound(audioLayer.Heartbeat08);
             break;
-        //candles
+        //candle hallway
 		case 9:
-            aLayer.setSoundVolume(aLayer.Heartbeat09, 255);
-            aLayer.setSoundVolume(aLayer.rainIndoors, 255);
-            aLayer.playSound(aLayer.Heartbeat09);
-            aLayer.playSound(aLayer.rainIndoors);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat09, 255);
+            audioLayer.setSoundVolume(audioLayer.rainIndoors, 255);
+            audioLayer.playSound(audioLayer.Heartbeat09);
+            audioLayer.playSound(audioLayer.rainIndoors);
             break;
         //balcony
 		case 10:
-            aLayer.setSoundVolume(aLayer.Heartbeat10, 255);
-            aLayer.setSoundVolume(aLayer.rainOutdoors, 255);
-            aLayer.playSound(aLayer.Heartbeat10);
-            aLayer.playSound(aLayer.rainOutdoors);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat10, 255);
+            audioLayer.setSoundVolume(audioLayer.rainOutdoors, 255);
+            audioLayer.playSound(audioLayer.Heartbeat10);
+            audioLayer.playSound(audioLayer.rainOutdoors);
             break;
         //basement hallway
 		case 11:
-            aLayer.setSoundVolume(aLayer.Heartbeat11, 255);
-            aLayer.playSound(aLayer.Heartbeat11);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat11, 255);
+            audioLayer.playSound(audioLayer.Heartbeat11);
             break;
         //basement stairs top
 		case 12:
-            aLayer.setSoundVolume(aLayer.Heartbeat12, 255);
-            aLayer.playSound(aLayer.Heartbeat12);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat12, 255);
+            audioLayer.playSound(audioLayer.Heartbeat12);
             break;
         //basement stairs bottom
 		case 13:
-            aLayer.setSoundVolume(aLayer.Heartbeat13, 255);
-            aLayer.playSound(aLayer.Heartbeat13);
+            audioLayer.setSoundVolume(audioLayer.Heartbeat13, 255);
+            audioLayer.playSound(audioLayer.Heartbeat13);
             break;
 		default:
             break;
@@ -174,26 +179,26 @@ void Room::changeRoom(int newRoom) {
 
 void Room::click(Vec2i mMouseLoc) {
 	switch (mRoomID) {
-		case 1:		updateRoom01(mMouseLoc);			break;
-		case 2:		updateRoom02(mMouseLoc);			break;
-		case 3:		updateRoom03(mMouseLoc);			break;
-		case 4:		updateRoom04(mMouseLoc);			break;
-		case 5:		updateRoom05(mMouseLoc);			break;
-		case 6:		updateRoom06(mMouseLoc);			break;
-		case 7:		updateRoom07(mMouseLoc);			break;
-		case 8:		updateRoom08(mMouseLoc);			break;
-		case 9:		updateRoom09(mMouseLoc);			break;
-		case 10:	updateRoom10(mMouseLoc);			break;
-		case 11:	updateRoom11(mMouseLoc);			break;
-		case 12:	updateRoom12(mMouseLoc);			break;
-		case 13:	updateRoom13(mMouseLoc);			break;
-		default:	break;
+		case 1:		updateRoom01(mMouseLoc);	break;
+		case 2:		updateRoom02(mMouseLoc);	break;
+		case 3:		updateRoom03(mMouseLoc);	break;
+		case 4:		updateRoom04(mMouseLoc);	break;
+		case 5:		updateRoom05(mMouseLoc);	break;
+		case 6:		updateRoom06(mMouseLoc);	break;
+		case 7:		updateRoom07(mMouseLoc);	break;
+		case 8:		updateRoom08(mMouseLoc);	break;
+		case 9:		updateRoom09(mMouseLoc);	break;
+		case 10:	updateRoom10(mMouseLoc);	break;
+		case 11:	updateRoom11(mMouseLoc);	break;
+		case 12:	updateRoom12(mMouseLoc);	break;
+		case 13:	updateRoom13(mMouseLoc);	break;
+		default:                                break;
 	}
 }
 
 void Room::updateRoom01(Vec2i mMouseLoc) {
 	///////MASTER BEDROOM
-	aLayer.loopSound(aLayer.rainIndoors);
+	audioLayer.loopSound(audioLayer.rainIndoors);
 	// examine window
 	if (mMouseLoc.x>55 && mMouseLoc.x<795 && mMouseLoc.y>335 && mMouseLoc.y<956) {
 		R01ClickWhich = 1;
@@ -253,7 +258,7 @@ void Room::updateRoom02(Vec2i mMouseLoc) {
 	
 	// examine painting
 	if (mMouseLoc.x>686 && mMouseLoc.x<1224 && mMouseLoc.y>564 && mMouseLoc.y<937) {
-		pLayer.Painting1();
+		printLayer.Painting1();
 	}
 	// turn candles on and off
 	else if (mMouseLoc.x>1772 && mMouseLoc.x<1884 && mMouseLoc.y>820 && mMouseLoc.y<1040) {
@@ -286,8 +291,8 @@ void Room::updateRoom03(Vec2i mMouseLoc) {
 }
 void Room::updateRoom04(Vec2i mMouseLoc) {
 	///////////GRAND HALLWAY TOP
-	aLayer.loopSound(aLayer.tickTock);
-	aLayer.loopSound(aLayer.rainIndoors);
+	audioLayer.loopSound(audioLayer.tickTock);
+	audioLayer.loopSound(audioLayer.rainIndoors);
 	// examine painting
 	// examine plants
 	// examine desk (lamp)
@@ -335,7 +340,7 @@ void Room::updateRoom06(Vec2i mMouseLoc) {
 	// examine cabinet
 }
 void Room::updateRoom07(Vec2i mMouseLoc) {
-	aLayer.loopSound(aLayer.fire);
+	audioLayer.loopSound(audioLayer.fire);
 	////////GUEST BEDROOM
 	// examine wardrobe
 	// examine bed
@@ -366,7 +371,7 @@ void Room::updateRoom08(Vec2i mMouseLoc) {
 }
 void Room::updateRoom09(Vec2i mMouseLoc) {
 	/////////HallofCAndles
-	aLayer.loopSound(aLayer.rainIndoors);
+	audioLayer.loopSound(audioLayer.rainIndoors);
 	// door back to library
 	if (mMouseLoc.x>1584 && mMouseLoc.x<1723 && mMouseLoc.y>745 && mMouseLoc.y<1015) {
 		changeRoom(8);				///////advance room
@@ -380,7 +385,7 @@ void Room::updateRoom09(Vec2i mMouseLoc) {
 }
 void Room::updateRoom10(Vec2i mMouseLoc) {
 	////////BALCONY
-	aLayer.loopSound(aLayer.rainOutdoors);
+	audioLayer.loopSound(audioLayer.rainOutdoors);
 	// flickering background trees
 	// pots (diary 6)(key to basement)
 	// ivy
@@ -472,38 +477,38 @@ void Room::drawRoom01() {
 	gl::disableAlphaBlending();
 	switch(R01ClickWhich) {
 		case 1:
-			pLayer.OpenBedroomWindow(); ///
+			printLayer.OpenBedroomWindow(); ///
 			break;
 		case 2:
-			pLayer.TableWithLamp2();
+			printLayer.TableWithLamp2();
 			break;
 		case 3:
-			if(R01BedClick==0) pLayer.Bed();
-			else if(R01BedClick==1) pLayer.Bed(); //display note
+			if(R01BedClick==0) printLayer.Bed();
+			else if(R01BedClick==1) printLayer.Bed(); //display note
 			break;
 		case 4:
-			if(R01WardrobeClick==0)	pLayer.WardrobeAjar1();
-			else if(R01WardrobeClick==1) pLayer.WardrobeAjar2();
-			else if(R01WardrobeClick==2) pLayer.WardrobeAjar3();
-			else pLayer.WardrobeAjar4();
+			if(R01WardrobeClick==0)	printLayer.WardrobeAjar1();
+			else if(R01WardrobeClick==1) printLayer.WardrobeAjar2();
+			else if(R01WardrobeClick==2) printLayer.WardrobeAjar3();
+			else printLayer.WardrobeAjar4();
 			break;
 		case 5:
-			pLayer.PottedPlant1(); ///
+			printLayer.PottedPlant1(); ///
 			break;
 		case 6:
 			if(R01DoorLock) {
-				if (R01DoorPush==0) pLayer.LockedDoor1();
+				if (R01DoorPush==0) printLayer.LockedDoor1();
 				else {
 					if (R01key) {
-						pLayer.LockedDoor2();
+						printLayer.LockedDoor2();
 						R01DoorLock = false;
 					}
-					else pLayer.LockedDoor3();
+					else printLayer.LockedDoor3();
 				}
-			} else pLayer.LockedDoor4();
+			} else printLayer.LockedDoor4();
 			break;
 		case 7:
-			pLayer.PottedPlant1(); ///
+			printLayer.PottedPlant1(); ///
 			break;
 	}
 }

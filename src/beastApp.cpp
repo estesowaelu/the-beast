@@ -80,8 +80,8 @@ void beast::setup() {
 	room.setup();
     
 	app::setFullScreen();
-    centerWidth = getWindowWidth()/2;
-    centerHeight = getWindowHeight()/2;
+    centerWidth = getWindowWidth()*.5;
+    centerHeight = getWindowHeight()*.5;
 	mMouseLoc = Vec2i(centerWidth, centerHeight);
 }
 

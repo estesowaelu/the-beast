@@ -10,7 +10,7 @@
 
 AudioLayer::AudioLayer() {}
 
-void AudioLayer::initialize() {
+void AudioLayer::setup() {
 	EnterMovies();
 	
 	CFBundleRef gameBundle = CFBundleGetMainBundle();

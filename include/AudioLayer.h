@@ -1,9 +1,9 @@
 //
+//  The Beast
+//	A game conceived for Global Game Jam 2013
+//
 //  AudioLayer.h
-//  beast
-//
-//  Created by Tim Honeywell on 13/01/27.
-//
+//  Created by Tim Honeywell on 27 January 2013.
 //
 
 #pragma once
@@ -14,7 +14,7 @@
 class AudioLayer {
 public:
 	AudioLayer();
-	void initialize();
+	void setup();
 	void service();
 	void silence();
 	
